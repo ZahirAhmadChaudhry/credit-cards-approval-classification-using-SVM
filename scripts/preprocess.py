@@ -24,14 +24,13 @@ class DataPreprocessing:
         # Selecting categorical columns for one-hot encoding
         categorical_columns = ['Industry', 'Ethnicity', 'Citizen']
 
-        # Applying OneHotEncoder without specifying `sparse`
+        # Applying OneHotEncoder
         encoder = OneHotEncoder()
         encoded_features_sparse = encoder.fit_transform(df[categorical_columns])
 
-        # Converting to dense array manually if needed
+        # Converting to dense array manually
         encoded_features = encoded_features_sparse.toarray()
         
-        # Creating a DataFrame with the encoded features
         # Correctly generating column names
         encoded_df = pd.DataFrame(encoded_features, columns=encoder.get_feature_names_out())
         
@@ -47,9 +46,6 @@ class DataPreprocessing:
 
         return(df_encoded)
     
-    '''Let's start with Feature Importance from a Random Forest model to get an initial ranking 
-    of features based on their importance. The aim is to understand the relative importance of each 
-    feature in predicting the target. '''
 
     def feature_importance(self, df_encoded):
         # Separating the features and the target variable
@@ -78,8 +74,7 @@ class DataPreprocessing:
         df_refined = df_encoded[selected_features]
         return(df_refined)
 
-    ''' Let's apply the log transformation to CreditScore, YearsEmployed, Income, Debt, and Age 
-    and then assess the effect on their distributions.'''
+    
 
     def scaling(self, df_refined): 
         # Applying log transformation with a small constant to handle zero values
@@ -90,9 +85,6 @@ class DataPreprocessing:
         df_transformed['Debt'] = np.log(df_transformed['Debt'] + 1)
         df_transformed['Age'] = np.log(df_transformed['Age'] + 1)
 
-        #With the skewness addressed, the next step is to normalize these features to ensure they're on a similar scale, 
-        #enhancing the SVM model's learning efficiency. We'll use Min-Max scaling to transform the features into a range [0, 1], 
-        #ensuring that no single feature dominates due to its scale.
 
         # Initializing the MinMaxScaler
         scaler = MinMaxScaler()

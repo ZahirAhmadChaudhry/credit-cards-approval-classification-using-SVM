@@ -16,19 +16,12 @@ class Training:
     def __init__(self, data):
         self.data = data
     
-    '''The funcion traing_process use the preprocess data to search results
-    for the Linear SVM, also can be done trying with a RBF kernel but in this cas
-    the function will return the best parameters and the training results for 
-    linear SVM so the only functions that will need is def linear, but the others can also
-    be used for compare results.'''
 
     def training_process(self):
         df = self.data
         mean_cv_score,X_train, X_test, y_train, y_test = self.cross_validation(df)
-        #best_parameters, best_score = self.grid_search(X_train, y_train)
+        
         best_parameters, best_score, y_pred = self.linear(X_train, y_train, X_test, y_test)
-        #y_test, y_pred = self.svm_training(X_train, y_train, X_test, y_test)
-        #y_test, y_pred_sampled = self.applying_smote(X_train, y_train, X_test, y_test)
         
         print('The best parameters are: ', best_parameters, ' The best score is ', best_score)
         return(X_train, X_test, y_test, y_pred)
@@ -75,31 +68,4 @@ class Training:
         best_score = grid_search_linear.best_score_
         y_pred_test = grid_search_linear.predict(X_test)
         return(best_parameters, best_score, y_pred_test)
-
-
-    def svm_training(self, X_train, y_train, X_test, y_test):
-        poly = PolynomialFeatures(degree=2)
-        X_train_poly = poly.fit_transform(X_train)
-        X_test_poly = poly.transform(X_test)
-        svm_optimized = SVC(C=100, gamma=1, kernel='rbf', random_state=42)
-        svm_optimized.fit(X_train_poly, y_train)
-        y_pred = svm_optimized.predict(X_test_poly)
-        X_test_transformed = poly.transform(X_test)
-        y_pred_test = svm_optimized.predict(X_test_transformed)
-        print("Classification Report:")
-        print(classification_report(y_test, y_pred_test))
-
-        roc_auc = roc_auc_score(y_test, y_pred_test)
-        print(f"ROC-AUC Score: {roc_auc}")
-        
-        return(y_test, y_pred)
-    
-    def applying_smote(self, X_train, y_train, X_test, y_test):
-        smote = SMOTE(random_state=42)
-        X_train_resampled, y_train_resampled = smote.fit_resample(X_train, y_train)
-        svm_optimized_resampled = SVC(C=100, gamma=1, kernel='rbf', random_state=42)
-        svm_optimized_resampled.fit(X_train_resampled, y_train_resampled)
-        y_pred_resampled = svm_optimized_resampled.predict(X_test)
-
-        return(y_test, y_pred_resampled)
 
