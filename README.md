@@ -50,25 +50,6 @@ To set up the project environment, follow these steps:
 The Project can be run from main.py as follows:
 
 Run the `main.py` script to initiate the full pipeline, which includes data preprocessing, model training, and evaluation. This script acts as an entry point for the entire project workflow.
-The project can be run in parts as follows:
-
-1. **Data Preprocessing**: Run the `preprocess.py` script to perform data cleaning and feature engineering.
-   
-   ```sh
-   python scripts/preprocess.py
-   ```
-
-2. **Model Training**: Execute the `training.py` script to train the SVM models and save the best-performing model.
-   
-   ```sh
-   python scripts/training.py
-   ```
-
-3. **Evaluation**: To evaluate the model's performance on the test set, run the `evaluation.py` script.
-   
-   ```sh
-   python scripts/evaluation.py
-   ```
 
 Alternatively, you can explore the Jupyter notebooks in the `src` directory for a more interactive experience.
 
