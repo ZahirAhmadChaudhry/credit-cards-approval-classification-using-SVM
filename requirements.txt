@@ -4,3 +4,5 @@ seaborn
 scipy
 numpy
 imbalanced-learn
+scikit-learn
+joblib

@@ -45,7 +45,7 @@ To set up the project environment, follow these steps:
    ```sh
    source .venv/bin/activate
    ```
-
+   
 ## Usage
 
 The project can be run in parts as follows:
