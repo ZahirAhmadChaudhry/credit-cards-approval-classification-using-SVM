@@ -73,4 +73,4 @@ Alternatively, you can explore the Jupyter notebooks in the `src` directory for 
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE).
+This project is licensed under the [MIT License](https://github.com/ZahirAhmadChaudhry/credit-cards-approval-classification-using-SVM/blob/main/LICENSE).
